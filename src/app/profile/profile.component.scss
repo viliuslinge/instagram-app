@@ -1,0 +1,24 @@
+.profile-container {
+  max-width: 600px;
+  margin: 20px auto;
+  .profile-picture {
+    max-width: 40%;
+    text-align: center;
+    img {
+      border-radius: 50%;
+      width: 100%;
+      display: block;
+      margin: 10px auto;
+    }
+  }
+}
+.buttons {
+  margin-top: 30px;
+  display: flex;
+}
+.profile-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+

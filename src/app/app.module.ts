@@ -14,11 +14,14 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 // My components
 import { HomeComponent } from './home/home.component';
-import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './ui/navbar/navbar.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 // My services
 import { AuthService } from './core/auth.service';
+import { UserService } from './_services/user.service';
+import { PostService } from './_services/post.service';
 // Angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,14 +29,23 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatStepperModule } from '@angular/material/stepper';
+// My guards
+import { AuthGuard } from './core/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AuthComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -53,9 +65,16 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule,
+    MatStepperModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

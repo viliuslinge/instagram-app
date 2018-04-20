@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../core/auth.service';
+import { AuthService } from '../../core/auth.service';
+import { Router } from '@angular/router';
 
 type UserFields = 'name' | 'email' | 'password';
 type FormErrors = {[u in UserFields]: string};
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   userForm: FormGroup;
   formErrors: FormErrors = {
@@ -37,7 +38,8 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private _aS: AuthService
+    private _aS: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -97,7 +99,8 @@ export class AuthComponent implements OnInit {
       this.userForm.value['email'],
       this.userForm.value['name'],
       this.userForm.value['password']
+    ).then(
+      () => this.router.navigate(['/dashboard'])
     );
   }
-
 }

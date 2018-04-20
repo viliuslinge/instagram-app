@@ -1,0 +1,33 @@
+<mat-card class="profile-container">
+  <div class="profile-name">
+    <div class="change-name" *ngIf="!editable">
+      <h3>{{ user?.displayName }}</h3>
+      <button mat-mini-fab (click)="toggleName()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <div class="input-name" *ngIf="editable">
+      <input type="text" [(ngModel)]="user.displayName">
+      <button (click)="saveName()" mat-mini-fab>
+        <mat-icon>done</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="profile-picture">
+    <img *ngIf="user" src="{{ user.photoURL }}" alt="">
+    <div class="buttons">
+      <button
+        type="button"
+        name="button"
+        (click)="fileUpload.click()"
+      >
+        Change picture
+      </button>
+      <input (click)="detectFile($event)" id="hidden-from-screen" type="file" #fileUpload>
+    </div>
+  </div>
+</mat-card>
+
+<mat-card>
+
+</mat-card>

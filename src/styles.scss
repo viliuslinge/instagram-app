@@ -1,4 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 body {
   padding: 0;
   margin: 0;
@@ -18,4 +19,8 @@ body {
 }
 .sm-text {
   font-size: 13px;
+}
+#hidden-from-screen {
+  visibility: hidden;
+  width: 10px;
 }
