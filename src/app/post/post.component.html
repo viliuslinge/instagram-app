@@ -1,5 +1,6 @@
 <mat-card class="post-container">
   <mat-horizontal-stepper #stepper="matHorizontalStepper">
+
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Upload</ng-template>
       <img *ngIf="post.photoURL" src="{{ post.photoURL }}" alt="">
@@ -12,20 +13,34 @@
         <mat-icon>delete</mat-icon>
       </button>
     </mat-step>
+
     <mat-step [stepControl]="secondFormGroup">
       <ng-template matStepLabel>Description</ng-template>
-      <input [(ngModel)]="description" matInput placeholder="Address" required>
+      <input
+        [(ngModel)]="description"
+        matInput placeholder="Address"
+        required
+        value="{{ post.description }}"
+      >
       <div>
-        <button (click)="detectDescription()" mat-button matStepperPrevious>Next</button>
+        <button (click)="detectDescription()" mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
+
     <mat-step>
       <ng-template matStepLabel>Post</ng-template>
-      You are now done.
+      <img src="{{ post.photoURL }}" alt="">
+      <p>{{ post.description }}</p>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button
+          mat-button
+          matStepperNext
+          (click)="detectStatus()"
+        >
+          Post
+        </button>
       </div>
     </mat-step>
+
   </mat-horizontal-stepper>
 </mat-card>

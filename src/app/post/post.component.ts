@@ -11,10 +11,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class PostComponent implements OnInit {
 
   post: any = {
-    photoURL: ''
+    photoURL: '',
+    description: ''
   };
   id: String;
-  description: String;
+  description: String = '';
 
   constructor(
     private _pS: PostService,
@@ -62,6 +63,12 @@ export class PostComponent implements OnInit {
 
   detectDescription() {
     this._pS.updateDescription(this.id, this.description);
+  }
+
+  detectStatus() {
+    this._pS.updateStatus(this.id).then(
+      () => this.router.navigate(['dashboard'])
+    );
   }
 
   deletePhoto() {

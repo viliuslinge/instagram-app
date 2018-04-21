@@ -77,4 +77,10 @@ export class PostService {
     });
   }
 
+  updateStatus(id) {
+    return this.getOnePost(id).update({
+      status: 'active'
+    });
+  }
+
 }

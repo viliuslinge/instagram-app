@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  dashboardPosts: any;
+
+  constructor(private _afs: AngularFirestore) { }
 
   ngOnInit() {
+    this._afs.collection('posts', ref => ref.where('status', '==', 'active'))
+      .valueChanges()
+      .subscribe(
+        posts => this.dashboardPosts = posts
+      );
   }
 
 }
