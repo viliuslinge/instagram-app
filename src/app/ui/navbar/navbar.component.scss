@@ -1,8 +1,18 @@
 .nav {
   background-color: white;
   border-bottom: 1px solid rgb(240, 240, 240);
+  position: fixed;
+}
+.nav-row {
+  padding: 0 30px;
 }
 .nav-logo {
   cursor: pointer;
   outline: none;
+  height: 28px;
+  border: 8px solid transparent;
+  &:hover {
+    border: 8px solid #e0e0e0;
+    background-color: #e0e0e0;
+  }
 }

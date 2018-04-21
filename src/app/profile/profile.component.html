@@ -1,33 +1,43 @@
 <mat-card class="profile-container">
-  <div class="profile-name">
-    <div class="change-name" *ngIf="!editable">
-      <h3>{{ user?.displayName }}</h3>
-      <button mat-mini-fab (click)="toggleName()">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
-    <div class="input-name" *ngIf="editable">
-      <input type="text" [(ngModel)]="user.displayName">
-      <button (click)="saveName()" mat-mini-fab>
-        <mat-icon>done</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div class="profile-picture">
-    <img *ngIf="user" src="{{ user.photoURL }}" alt="">
-    <div class="buttons">
-      <button
-        type="button"
-        name="button"
-        (click)="fileUpload.click()"
-      >
-        Change picture
-      </button>
-      <input (click)="detectFile($event)" id="hidden-from-screen" type="file" #fileUpload>
-    </div>
-  </div>
-</mat-card>
 
-<mat-card>
+  <div>
+    <div class="change-name" *ngIf="!editable">
+      <h1 class="profile-name">{{ user?.displayName }}</h1>
+      <button (click)="toggleName()" mat-button class="button-icon">
+        <mat-icon class="a-icon">edit</mat-icon>
+      </button>
+    </div>
+
+    <div class="input-name" *ngIf="editable">
+      <input
+        autofocus="editable"
+        type="text"
+        required
+        [(ngModel)]="user.displayName"
+      >
+      <button (click)="saveName()" mat-button>
+        Save
+      </button>
+    </div>
+
+    <button
+      mat-button
+      *ngIf="(auth.user | async)"
+      (click)="signOut()"
+    >
+      <mat-icon class="a-icon">exit_to_app</mat-icon>
+      Log out
+    </button>
+  </div>
+
+  <div class="profile-picture" *ngIf="user" (click)="fileUpload.click()">
+    <img src="{{ user.photoURL }}" alt="">
+
+    <input
+      (click)="detectFile($event)"
+      id="hidden-from-screen"
+      type="file" #fileUpload
+    >
+  </div>
 
 </mat-card>

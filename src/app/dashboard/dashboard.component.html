@@ -1,7 +1,28 @@
-<div *ngFor="let post of dashboardPosts">
-  <img
-    [ngStyle]="{'width': '200px'}"
-    src="{{ post.photoURL }}"
-    alt=""
-  >
-</div>
+<section *ngIf="!dashboardPosts" class="collection">
+  <div class="collection-item" *ngFor="let ghostPost of ghostPosts">
+    <div class="picture"></div>
+  </div>
+</section>
+
+<section *ngIf="dashboardPosts" class="collection">
+  <div class="collection-item" *ngFor="let post of dashboardPosts">
+    <div
+      class="picture"
+      [ngStyle]="{'background-image': 'url(' + post.photoURL + ')'}"
+      (click)="openPostDetails(post)"
+    ></div>
+    <div class="details">
+      <div *ngFor="let user of users">
+        <img *ngIf="user.uid === post.user_uid"
+          class="user-avatar"
+          [src]="user.uid === post.user_uid ? user.photoURL : false"
+          alt=""
+        >
+      </div>
+      <p *ngIf="!post.description" class="description">...</p>
+      <p *ngIf="post.description" class="description">{{ post.description }}</p>
+    </div>
+  </div>
+</section>
+
+

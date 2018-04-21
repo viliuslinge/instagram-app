@@ -18,6 +18,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './ui/navbar/navbar.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PostComponent } from './post/post.component';
+import { FeedDetailsComponent } from './feed-details/feed-details.component';
 // My services
 import { AuthService } from './core/auth.service';
 import { UserService } from './_services/user.service';
@@ -31,10 +34,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
 // My guards
 import { AuthGuard } from './core/auth.guard';
-import { ProfileComponent } from './profile/profile.component';
-import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { PostComponent } from './post/post.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    PostComponent
+    PostComponent,
+    FeedDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { PostComponent } from './post/post.component';
     MatFormFieldModule,
     MatButtonModule,
     MatTabsModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,
@@ -75,6 +79,7 @@ import { PostComponent } from './post/post.component';
     UserService,
     PostService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FeedDetailsComponent]
 })
 export class AppModule { }

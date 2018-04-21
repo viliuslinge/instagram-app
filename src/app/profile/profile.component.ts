@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,10 @@ export class ProfileComponent implements OnInit {
   user: any;
   editable = false;
 
-  constructor(private _uS: UserService) { }
+  constructor(
+    private _uS: UserService,
+    public auth: AuthService
+  ) { }
 
   ngOnInit() {
     this.user = this._uS.getProfileInfo().subscribe(
@@ -22,6 +26,7 @@ export class ProfileComponent implements OnInit {
   toggleName() {
     this.editable = !this.editable;
   }
+
   saveName() {
     this._uS.updateProfile(this.user.uid, this.user.displayName);
     this.editable = false;
@@ -37,6 +42,10 @@ export class ProfileComponent implements OnInit {
     }
 
     this._uS.uploadProfilePicture(files[0], this.user.uid);
+  }
+
+  signOut() {
+    this.auth.signOut();
   }
 
 }

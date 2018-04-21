@@ -1,27 +1,27 @@
 <mat-toolbar class="nav">
-  <mat-toolbar-row>
-    <span
+  <mat-toolbar-row class="nav-row">
+
+    <img
+      src="../../../assets/logo.svg"
+      alt=""
       routerLink="/"
       class="nav-logo"
       *ngIf="!(auth.user | async)"
     >
-      INSTAPP
-    </span>
 
-    <span
+    <img
+      src="../../../assets/logo.svg"
+      alt=""
       routerLink="/dashboard"
       class="nav-logo"
       *ngIf="(auth.user | async)"
     >
-      INSTAPP
-    </span>
 
     <span class="spacer"></span>
 
     <button
-      mat-button color="primary"
+      mat-button
       [routerLink]="['sign-up']"
-      class="a-icon"
       *ngIf="!(auth.user | async)"
     >
       Sign Up
@@ -29,29 +29,35 @@
 
     <button
       mat-button
-      color="primary"
       [routerLink]="['sign-in']"
-      class="a-icon"
       *ngIf="!(auth.user | async)"
     >
       Sign In
     </button>
 
-    <button [routerLink]="['post', 'new']" mat-icon-button color="primary" *ngIf="(auth.user | async)">
-      <mat-icon class="a-icon">add</mat-icon>
-    </button>
-
-    <span [routerLink]="['profile']" *ngIf="(auth.user | async)">
-      {{ (auth.user | async)?.displayName }}
-    </span>
-
-    <button mat-icon-button color="primary" *ngIf="(auth.user | async)">
-      <mat-icon
-        (click)="signOut()"
-        class="a-icon"
-      >
-        exit_to_app
+    <button
+      class="button-icon"
+      [routerLink]="['post', 'new']"
+      *ngIf="(auth.user | async)"
+      mat-button
+    >
+      <mat-icon class="a-icon">
+        add
       </mat-icon>
     </button>
+
+    <button
+      [routerLink]="['profile']"
+      *ngIf="(auth.user | async)"
+      mat-button
+    >
+      <img
+        class="user-avatar"
+        src="{{ (auth.user | async)?.photoURL }}"
+        alt=""
+      >
+      {{ (auth.user | async)?.displayName }}
+    </button>
+
   </mat-toolbar-row>
 </mat-toolbar>

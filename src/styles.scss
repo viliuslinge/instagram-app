@@ -3,6 +3,7 @@
 body {
   padding: 0;
   margin: 0;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 .spacer {
   flex: 1 1 auto;
@@ -23,4 +24,20 @@ body {
 #hidden-from-screen {
   visibility: hidden;
   width: 10px;
+}
+.mat-button {
+  font-weight: 700;
+}
+.mat-button.button-icon {
+  min-width: 36px;
+  padding: 0;
+}
+.a-icon {
+  padding: 0;
+}
+.user-avatar {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
