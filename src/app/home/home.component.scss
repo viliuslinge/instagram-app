@@ -1,0 +1,28 @@
+.container {
+  background-image: url('../../assets/landing-cover.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: calc(100vh - 65px);
+  width: 100vw;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  justify-content: center;
+  align-items: flex-start;
+  width: 600px;
+  color: rgb(0, 0, 0);
+  left: 15%;
+  height: 300px;
+  top: calc(50vh - 150px);
+  img {
+    height: 120px;
+  }
+  p {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #fff;
+  }
+}

@@ -12,14 +12,15 @@ export class PostComponent implements OnInit {
 
   post: any = {
     photoURL: '',
-    description: ''
+    description: '',
   };
   id: String;
   description: String = '';
+  selectedTabIndex = 0;
 
   constructor(
     private _pS: PostService,
-    private _auth: AuthService,
+    public _auth: AuthService,
     private router: Router,
     private aR: ActivatedRoute
   ) { }
@@ -73,5 +74,13 @@ export class PostComponent implements OnInit {
 
   deletePhoto() {
     this._pS.deletePhoto(this.id, this.post.imageName);
+  }
+
+  openNextStep() {
+    this.selectedTabIndex += 1;
+  }
+
+  openPreviousStep() {
+    this.selectedTabIndex -= 1;
   }
 }

@@ -1,4 +1,10 @@
 .auth-form {
-  margin: 20px auto;
-  max-width: 400px;
+  max-width: 250px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  margin-top: 20vh
+}
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: none;
 }

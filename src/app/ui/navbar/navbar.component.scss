@@ -2,9 +2,10 @@
   background-color: white;
   border-bottom: 1px solid rgb(240, 240, 240);
   position: fixed;
+  z-index: 1;
 }
 .nav-row {
-  padding: 0 30px;
+  padding: 0 40px;
 }
 .nav-logo {
   cursor: pointer;
@@ -15,4 +16,7 @@
     border: 8px solid #e0e0e0;
     background-color: #e0e0e0;
   }
+}
+.button-avatar {
+  display: inline-block
 }

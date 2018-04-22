@@ -51,11 +51,11 @@
       *ngIf="(auth.user | async)"
       mat-button
     >
-      <img
-        class="user-avatar"
-        src="{{ (auth.user | async)?.photoURL }}"
-        alt=""
-      >
+      <div
+        class="user-avatar button-avatar"
+        [ngStyle]="{'background-image': 'url(' + (auth.user | async)?.photoURL + ')'}"
+      ></div>
+
       {{ (auth.user | async)?.displayName }}
     </button>
 

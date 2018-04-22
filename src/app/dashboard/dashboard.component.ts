@@ -12,7 +12,7 @@ import { AuthService } from '../core/auth.service';
 export class DashboardComponent implements OnInit {
 
   dashboardPosts: any;
-  ghostPosts: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  ghostPosts: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   users: any;
 
   constructor(
@@ -48,7 +48,9 @@ export class DashboardComponent implements OnInit {
       data: {
         photoURL: post.photoURL,
         description: post.description,
-        userUid: post.user_uid
+        date: post.date,
+        userUid: post.user_uid,
+        users: this.users
       }
     });
   }

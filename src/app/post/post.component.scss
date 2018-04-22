@@ -1,15 +1,93 @@
 .post-container {
-  max-width: 600px;
+  max-width: 350px;
   margin: 20px auto;
 }
-.upload-image {
-  background-color: #dcdcdc;
-  border-radius: 5px;
-  text-align: center;
-  padding: 30px 20px;
-  color: #fff;
-  cursor: pointer;
+.step-container {
+  padding: 15px;
 }
-img {
+.button-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.default-image {
   width: 100%;
+  min-height: 250px;
+  background-image: url('../../assets/default-image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  position: relative;
+  &:hover {
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background-color: #00000018;
+      position: absolute;
+      z-index: 1;
+    }
+    &::after {
+      content: "";
+      background-image: url('../../assets/camera.svg');
+      width: 100%;
+      height: 100%;
+      background-size: 70px;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      cursor: pointer;
+    }
+  }
+}
+.upload-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.hint {
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 10px 0 20px 0;
+  color: grey;
+  margin: 0;
+}
+.description {
+  font-size: 0.9rem;
+  color: grey;
+}
+/deep/ .mat-tab-label.mat-ripple {
+  min-width: 0;
+  flex-grow: 1;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: grey;
+}
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+.custom-button.mat-raised-button {
+  background-color: #e6e6e6;
+  color: black;
+  font-weight: 700;
+  box-shadow: none;
+}
+.mat-form-field {
+  width: 100%;
+}
+.details__user {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.details__user__name {
+  font-size: 0.9rem;
+  color: grey;
+  font-weight: 700;
+  margin: 0;
 }

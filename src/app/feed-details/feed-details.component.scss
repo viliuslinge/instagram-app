@@ -1,4 +1,43 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.picture-container {
+  width: calc(100% - 300px);
+  min-width: 300px;
+  flex-grow: 1;
+}
 .picture {
-  max-width: 100%;
+  width: 100%;
   max-height: 80vh;
+  vertical-align: middle;
+}
+.details {
+  width: 200px;
+  padding: 15px;
+  border-left: 1px solid #e6e6e6;
+  font-size: 0.9rem;
+  color: grey;
+  flex-grow: 1;
+}
+/deep/ .mat-dialog-container {
+  padding: 0;
+}
+/deep/ .cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.74);
+}
+.details__user {
+  display: flex;
+  align-items: center;
+}
+.details__user__name {
+  font-weight: 700;
+  margin: 0;
+}
+.details__date {
+  font-size: 0.7rem;
+}
+.feed-avatar {
+  height: 40px;
+  width: 40px;
 }

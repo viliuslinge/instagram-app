@@ -1,4 +1,4 @@
-<mat-card class="post-container">
+<!-- <mat-card class="post-container">
   <mat-horizontal-stepper #stepper="matHorizontalStepper">
 
     <mat-step [stepControl]="firstFormGroup">
@@ -43,4 +43,116 @@
     </mat-step>
 
   </mat-horizontal-stepper>
+</mat-card> -->
+
+<mat-card class="post-container">
+  <mat-tab-group [(selectedIndex)]="selectedTabIndex">
+
+    <mat-tab label="1.Upload" disabled>
+      <div class="step-container">
+        <p class="hint">Click below and upload any picture you want!</p>
+        <img
+          *ngIf="post.photoURL"
+          src="{{ post.photoURL }}"
+          class="upload-image"
+          alt=""
+        >
+
+        <div
+          *ngIf="!post.photoURL"
+          (click)="fileUpload.click()"
+          class="default-image">
+        </div>
+
+        <input (change)="detectFile($event)" #fileUpload id="hidden-from-screen" type="file">
+
+        <div *ngIf="post.photoURL" class="button-container">
+          <button (click)="deletePhoto()" mat-button class="button-icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button
+            class="custom-button"
+            mat-raised-button
+            color="primary"
+            (click)="openNextStep()"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="2.Comment" disabled>
+      <div class="step-container">
+        <p class="hint">Write down all your ideas here!</p>
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Describe your post"
+            [(ngModel)]="description"
+            value="{{ post.description }}">
+          </textarea>
+        </mat-form-field>
+        <div class="button-container">
+          <button
+            class="custom-button"
+            mat-raised-button color="primary"
+            (click)="openPreviousStep()"
+          >
+            Back
+          </button>
+          <button
+            class="custom-button"
+            mat-raised-button color="primary"
+            (click)="detectDescription(); openNextStep()"
+            matTabsNext
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="3.Share" disabled>
+      <div class="step-container">
+        <p class="hint">Review your post and share it with others!</p>
+        <img
+          *ngIf="post.photoURL"
+          src="{{ post.photoURL }}"
+          class="upload-image"
+          alt=""
+        >
+
+        <div class="details__user">
+          <div
+            class="user-avatar"
+            [ngStyle]="{'background-image': 'url(' + (_auth.user | async)?.photoURL + ')'}"
+          ></div>
+          <p class="details__user__name">{{ (_auth.user | async)?.displayName }}</p>
+        </div>
+
+        <p *ngIf="!post.description" class="description">...</p>
+        <p *ngIf="post.description" class="description">{{ post.description }}</p>
+
+        <div class="button-container">
+          <button
+            class="custom-button"
+            mat-raised-button
+            color="primary"
+            (click)="openPreviousStep()"
+          >
+            Back
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="detectStatus()"
+          >
+            Share!
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
 </mat-card>

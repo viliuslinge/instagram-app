@@ -54,7 +54,8 @@ export class PostService {
       'user_uid': uid,
       'status': 'draft',
       'photoURL': '',
-      'description': ''
+      'description': '',
+      'date': ''
     };
     return this._afs.collection('posts').add(picture);
   }
@@ -79,7 +80,8 @@ export class PostService {
 
   updateStatus(id) {
     return this.getOnePost(id).update({
-      status: 'active'
+      status: 'active',
+      date: new Date().getTime()
     });
   }
 
