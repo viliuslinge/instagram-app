@@ -48,6 +48,8 @@ div.mat-input-infix {
   width: 250px;
   border-radius: 50%;
   border: 10px solid #f1f1f1;
+}
+.profile-picture--private {
   &:hover {
     &::before {
       content: "";

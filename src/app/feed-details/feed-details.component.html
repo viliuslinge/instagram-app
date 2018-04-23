@@ -4,19 +4,20 @@
   </div>
 
   <div class="details">
-    <div *ngFor="let user of data.users">
-      <div class="details__user" *ngIf="user.uid === data.userUid">
-        <div
-          class="user-avatar feed-avatar"
-          [ngStyle]="{'background-image': 'url(' + user.photoURL + ')'}"
-        ></div>
-        <p class="details__user__name">{{ user.displayName }}</p>
-      </div>
+    <div class="details__user">
+      <!-- <div
+        class="user-avatar feed-avatar"
+        [ngStyle]="{'background-image': 'url(' + (data.user.photoURL | async) + ')'}"
+      ></div> -->
+
+      <!-- NURENDERINK DISPLAYNAME -->
+
+      <p class="details__user__name">{{ (data.user | async)?.displayName }}</p>
     </div>
 
     <p *ngIf="!data.description" class="description">...</p>
     <p *ngIf="data.description" class="description">{{ data.description }}</p>
-    <p class="details__date">{{ data.date | date:'MMM d, y, h:mm' }}</p>
+    <p class="details__date">{{ data.created_at | date:'MMM d, y, h:mm' }}</p>
   </div>
 
 </div>

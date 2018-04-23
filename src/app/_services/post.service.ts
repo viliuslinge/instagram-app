@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { AuthService } from '../core/auth.service';
+import { UserService } from './user.service';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -12,13 +13,14 @@ export class PostService {
 
   constructor(
     private _aS: AuthService,
-    private _afs: AngularFirestore
+    private _afs: AngularFirestore,
+    private _uS: UserService
   ) { }
 
   uploadPicture(upload, id) {
     const storageRef = firebase.storage().ref();
     const imageName = new Date().getTime();
-    const uploadTask = storageRef.child(`posts/${imageName}`).put(upload);
+    const uploadTask = storageRef.child(`posts/origin/${imageName}`).put(upload);
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot: firebase.storage.UploadTaskSnapshot) => {
@@ -45,6 +47,31 @@ export class PostService {
     return this._afs.doc<any>(`posts/${id}`);
   }
 
+  getAllActivePosts() {
+    return this._afs.collection('posts', (ref) => ref
+      .where('status', '==', 'active')
+      .orderBy('created_at', 'desc'))
+      .snapshotChanges().map(
+        (posts) => {
+          return posts.map(
+            (post) => {
+              const data = post.payload.doc.data();
+              const user = this._uS.getProfile(data.user_uid).valueChanges();
+
+              return  {
+                id: post.payload.doc.id,
+                user_uid: data.user_uid,
+                description: data.description,
+                user: user,
+                photoURL: data.photoURL,
+                created_at: data.created_at
+              };
+            }
+          );
+        }
+      );
+  }
+
   private updatePicture(upload, id) {
     return this.getOnePost(id).update(upload);
   }
@@ -55,7 +82,8 @@ export class PostService {
       'status': 'draft',
       'photoURL': '',
       'description': '',
-      'date': ''
+      'created_at': new Date().getTime(),
+      'updated_at': new Date().getTime()
     };
     return this._afs.collection('posts').add(picture);
   }
@@ -81,7 +109,6 @@ export class PostService {
   updateStatus(id) {
     return this.getOnePost(id).update({
       status: 'active',
-      date: new Date().getTime()
     });
   }
 

@@ -3,6 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { MatDialog } from '@angular/material';
 import { FeedDetailsComponent } from '../feed-details/feed-details.component';
 import { AuthService } from '../core/auth.service';
+import { PostService } from '../_services/post.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,46 +13,32 @@ import { AuthService } from '../core/auth.service';
 export class DashboardComponent implements OnInit {
 
   dashboardPosts: any;
-  ghostPosts: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
-  users: any;
+  // ghostPosts: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
   constructor(
     private _afs: AngularFirestore,
     public dialog: MatDialog,
-    public auth: AuthService
+    public auth: AuthService,
+    private _pS: PostService
   ) { }
 
   ngOnInit() {
-    this._afs.collection('posts', ref => ref.where('status', '==', 'active'))
-      .valueChanges()
-      .subscribe(posts => this.dashboardPosts = posts.sort(this.compare));
-
-    this._afs.collection('users')
-    .valueChanges()
-    .subscribe(
-      users => {
-        this.users = users;
-      }
-    );
+    this.dashboardPosts = this._pS.getAllActivePosts();
   }
 
-  compare(a, b) {
-    const dataA = a.imageName;
-    const dataB = b.imageName;
-    let comparison = 0;
-    dataA > dataB ? comparison = -1 : comparison = 1;
-    return comparison;
-  }
+  // SITS ATIDARO POPUPA
 
   openPostDetails(post): void {
     this.dialog.open(FeedDetailsComponent, {
-      data: {
-        photoURL: post.photoURL,
-        description: post.description,
-        date: post.date,
-        userUid: post.user_uid,
-        users: this.users
-      }
+      // data: {
+      //   photoURL: post.photoURL,
+      //   description: post.description,
+      //   created_at: post.created_at,
+      //   userUid: post.user_uid,
+      //   user: post.user
+      // }
+      data: post
     });
+
   }
 }

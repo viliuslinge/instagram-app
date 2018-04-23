@@ -3,7 +3,11 @@
   <div>
     <div class="change-name" *ngIf="!editable">
       <h1 class="profile-name">{{ user?.displayName }}</h1>
-      <button (click)="toggleName()" mat-button class="button-icon">
+      <button
+        *ngIf="user.uid === (auth.user | async)?.uid"
+        (click)="toggleName()"
+        mat-button class="button-icon"
+      >
         <mat-icon class="a-icon">edit</mat-icon>
       </button>
     </div>
@@ -20,24 +24,37 @@
       </button>
     </div>
 
-    <button
-      mat-button
-      *ngIf="(auth.user | async)"
-      (click)="signOut()"
-    >
-      <mat-icon class="a-icon">exit_to_app</mat-icon>
-      Log out
-    </button>
+    <div *ngIf="user.uid === (auth.user | async)?.uid">
+      <button
+        mat-button
+        *ngIf="(auth.user | async)"
+        (click)="signOut()"
+      >
+        <mat-icon class="a-icon">exit_to_app</mat-icon>
+        Log out
+      </button>
+    </div>
+
   </div>
 
-  <div class="profile-picture" *ngIf="user" (click)="fileUpload.click()">
-    <img src="{{ user.photoURL }}" alt="">
+  <div *ngIf="user">
+    <div class="profile-picture" *ngIf="!(user.uid === (auth.user | async)?.uid)">
+      <img src="{{ user.photoURL }}" alt="">
+    </div>
 
-    <input
-      (click)="detectFile($event)"
-      id="hidden-from-screen"
-      type="file" #fileUpload
+    <div
+      (click)="fileUpload.click()"
+      class="profile-picture profile-picture--private"
+      *ngIf="user.uid === (auth.user | async)?.uid"
     >
+      <img src="{{ user.photoURL }}" alt="">
+
+      <input
+        (click)="detectFile($event)"
+        id="hidden-from-screen"
+        type="file" #fileUpload
+      >
+    </div>
   </div>
 
 </mat-card>

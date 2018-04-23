@@ -47,7 +47,7 @@
     </button>
 
     <button
-      [routerLink]="['profile']"
+      [routerLink]="['../', 'profile', (auth.user | async)?.uid]"
       *ngIf="(auth.user | async)"
       mat-button
     >
