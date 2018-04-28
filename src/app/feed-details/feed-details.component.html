@@ -5,19 +5,27 @@
 
   <div class="details">
     <div class="details__user">
-      <!-- <div
+      <div
         class="user-avatar feed-avatar"
-        [ngStyle]="{'background-image': 'url(' + (data.user.photoURL | async) + ')'}"
-      ></div> -->
-
-      <!-- NURENDERINK DISPLAYNAME -->
-
-      <p class="details__user__name">{{ (data.user | async)?.displayName }}</p>
+        [ngStyle]="{'background-image': 'url(' + (user | async)?.photoURL + ')'}"
+        [routerLink]="['../', 'profile', data.user_uid]"
+        (click)="onNoClick()"
+      ></div>
+      <p
+        class="details__user__name"
+        [routerLink]="['../', 'profile', data.user_uid]"
+        (click)="onNoClick()"
+      >
+        {{ (user | async)?.displayName }}
+      </p>
     </div>
 
     <p *ngIf="!data.description" class="description">...</p>
     <p *ngIf="data.description" class="description">{{ data.description }}</p>
     <p class="details__date">{{ data.created_at | date:'MMM d, y, h:mm' }}</p>
+
+    <app-like [data]="data"></app-like>
+
   </div>
 
 </div>

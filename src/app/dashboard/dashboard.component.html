@@ -6,43 +6,33 @@
   </div>
 </section> -->
 
-<!-- <section *ngIf="dashboardPosts" class="collection">
-  <div class="collection-item-container" *ngFor="let post of dashboardPosts">
-    <div class="collection-item" (click)="openPostDetails(post)">
-      <div
-        class="picture"
-        [ngStyle]="{'background-image': 'url(' + post.photoURL + ')'}"
-      ></div>
-      <div class="details">
-        <p *ngIf="!post.description" class="details__description">...</p>
-        <p *ngIf="post.description" class="details__description">{{ post.description }}</p>
-        <p class="details__date">{{ post.date | date:'MMM d, y, h:mm'}}</p>
-
-        <div *ngFor="let user of users">
-          <div class="details__user" *ngIf="user.uid === post.user_uid">
-            <div
-              class="user-avatar"
-              [ngStyle]="{'background-image': 'url(' + user.photoURL + ')'}"
-            ></div>
-            <p class="details__user__name">{{ user.displayName }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 <section *ngIf="dashboardPosts" class="collection">
   <div class="collection-item-container" *ngFor="let post of dashboardPosts | async">
-    <div class="collection-item" (click)="openPostDetails(post)">
+    <div
+      class="collection-item"
+      (click)="openPostDetails(post, $event)"
+      on-mouseover="showLikeComponent($event)"
+      on-mouseout="hideLikeComponent($event)"
+    >
+
       <div
         class="picture"
         [ngStyle]="{'background-image': 'url(' + post.photoURL + ')'}"
-      ></div>
+      >
+        <app-like
+          [data]="post"
+          [ngStyle]="{'display': likeComponent}"
+          class="like-component"
+        ></app-like>
+      </div>
+
       <div class="details">
         <p *ngIf="!post.description" class="details__description">...</p>
         <p *ngIf="post.description" class="details__description">{{ post.description }}</p>
-        <p class="details__date">{{ post.created_at | date:'MMM d, y, h:mm'}}</p>
+        <div class="details__info">
+          <p>{{ post.likes }} ♥</p>
+          <p class="details__info__date">{{ post.created_at | date:'MMM d, y, h:mm'}}</p>
+        </div>
 
         <div class="details__user">
           <div
@@ -52,15 +42,7 @@
           <p class="details__user__name">{{ (post.user | async)?.displayName }}</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
-
-<!-- <mat-card *ngFor="let post of dashboardPosts | async">
-  <a [routerLink]="['../','profile', post.user_uid]">
-    {{ (post.user | async)?.displayName }}
-  </a>
-  <img src="{{ post.photoURL }}" alt="">
-</mat-card> -->
-
-

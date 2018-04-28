@@ -63,7 +63,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.details__date {
+.details__info {
   font-size: 0.6rem;
   margin: 5px 0;
+  display: flex;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+  .details__info__date {
+    margin-left: 10px;
+  }
+}
+.like-component {
+  position: absolute;
+  top: 0;
 }

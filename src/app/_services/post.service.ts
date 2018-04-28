@@ -64,7 +64,8 @@ export class PostService {
                 description: data.description,
                 user: user,
                 photoURL: data.photoURL,
-                created_at: data.created_at
+                created_at: data.created_at,
+                likes: data.likes
               };
             }
           );
@@ -83,7 +84,8 @@ export class PostService {
       'photoURL': '',
       'description': '',
       'created_at': new Date().getTime(),
-      'updated_at': new Date().getTime()
+      'updated_at': new Date().getTime(),
+      'likes': 0
     };
     return this._afs.collection('posts').add(picture);
   }

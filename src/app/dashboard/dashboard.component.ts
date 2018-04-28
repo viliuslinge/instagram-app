@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { FeedDetailsComponent } from '../feed-details/feed-details.component';
 import { AuthService } from '../core/auth.service';
 import { PostService } from '../_services/post.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,32 +14,36 @@ import { PostService } from '../_services/post.service';
 export class DashboardComponent implements OnInit {
 
   dashboardPosts: any;
+  likeComponent: String = 'none';
   // ghostPosts: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
   constructor(
     private _afs: AngularFirestore,
     public dialog: MatDialog,
     public auth: AuthService,
-    private _pS: PostService
+    private _pS: PostService,
+    private _uS: UserService
   ) { }
 
   ngOnInit() {
     this.dashboardPosts = this._pS.getAllActivePosts();
   }
 
-  // SITS ATIDARO POPUPA
+  showLikeComponent(event) {
+    event.currentTarget.childNodes[1].childNodes[1].style.display = 'block';
+  }
 
-  openPostDetails(post): void {
-    this.dialog.open(FeedDetailsComponent, {
-      // data: {
-      //   photoURL: post.photoURL,
-      //   description: post.description,
-      //   created_at: post.created_at,
-      //   userUid: post.user_uid,
-      //   user: post.user
-      // }
-      data: post
-    });
+  hideLikeComponent(event) {
+    event.currentTarget.childNodes[1].childNodes[1].style.display = 'none';
+  }
 
+  openPostDetails(post, e): void {
+    if (!e.target.classList.contains('like-button')) {
+      const dialogRef = this.dialog.open(FeedDetailsComponent, {
+        data: post
+      });
+      dialogRef.afterClosed().subscribe(res => {
+      });
+    }
   }
 }

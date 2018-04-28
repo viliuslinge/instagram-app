@@ -1,6 +1,6 @@
 <mat-card class="profile-container">
 
-  <div>
+  <div *ngIf="user">
     <div class="change-name" *ngIf="!editable">
       <h1 class="profile-name">{{ user?.displayName }}</h1>
       <button

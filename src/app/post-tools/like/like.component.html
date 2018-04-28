@@ -1,0 +1,16 @@
+<button
+  class="like-button"
+  *ngIf="like_id.length === 0"
+  (click)="addLike()"
+>
+  Like
+</button>
+<button
+  class="like-button"
+  *ngIf="like_id.length > 0"
+  (click)="deleteLike()"
+>
+  Dislike
+</button>
+<h1>{{ (post | async)?.likes }}</h1>
+

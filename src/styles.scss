@@ -32,6 +32,12 @@ body {
   min-width: 36px;
   padding: 0;
 }
+.custom-button.mat-raised-button {
+  background-color: #e6e6e6;
+  color: black;
+  font-weight: 700;
+  box-shadow: none;
+}
 .a-icon {
   padding: 0;
 }
@@ -43,4 +49,5 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #efefef;
 }
