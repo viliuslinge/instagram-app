@@ -5,24 +5,22 @@
   background-repeat: no-repeat;
   height: calc(100vh - 65px);
   width: 100vw;
-}
-.text {
   display: flex;
   flex-direction: column;
-  position: absolute;
   justify-content: center;
-  align-items: flex-start;
-  width: 600px;
-  color: rgb(0, 0, 0);
-  left: 15%;
-  height: 300px;
-  top: calc(50vh - 150px);
-  img {
-    height: 120px;
-  }
-  p {
-    font-size: 1.5rem;
-    margin-top: 20px;
-    color: #fff;
-  }
+  align-items: center;
+}
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+.button {
+  margin: 15px 0;
+}
+.logo {
+  width: 70%;
+  max-width: 200px;
+  margin-bottom: 20px;
 }

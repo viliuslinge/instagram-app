@@ -12,13 +12,11 @@
       class="collection-item"
       (click)="openPostDetails(post, $event)"
       on-mouseover="showLikeComponent($event)"
-      on-mouseout="hideLikeComponent($event)"
-    >
+      on-mouseout="hideLikeComponent($event)">
 
       <div
         class="picture"
-        [ngStyle]="{'background-image': 'url(' + post.photoURL + ')'}"
-      >
+        [ngStyle]="{'background-image': 'url(' + post.photoURL + ')'}">
         <app-like
           [data]="post"
           [ngStyle]="{'display': likeComponent}"
@@ -37,8 +35,8 @@
         <div class="details__user">
           <div
             class="user-avatar"
-            [ngStyle]="{'background-image': 'url(' + (post.user | async)?.photoURL + ')'}"
-          ></div>
+            [ngStyle]="{'background-image': 'url(' + (post.user | async)?.photoURL + ')'}">
+          </div>
           <p class="details__user__name">{{ (post.user | async)?.displayName }}</p>
         </div>
       </div>

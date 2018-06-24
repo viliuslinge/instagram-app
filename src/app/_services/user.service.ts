@@ -54,5 +54,4 @@ export class UserService {
   changeUserProfilePicture(upload, uid) {
     return this.getProfile(uid).update({'photoURL': upload.url});
   }
-
 }

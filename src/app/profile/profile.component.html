@@ -34,7 +34,6 @@
         Log out
       </button>
     </div>
-
   </div>
 
   <div *ngIf="user">
@@ -45,8 +44,7 @@
     <div
       (click)="fileUpload.click()"
       class="profile-picture profile-picture--private"
-      *ngIf="user.uid === (auth.user | async)?.uid"
-    >
+      *ngIf="user.uid === (auth.user | async)?.uid">
       <img src="{{ user.photoURL }}" alt="">
 
       <input
